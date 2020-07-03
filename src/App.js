@@ -1,12 +1,12 @@
 import React from 'react';
-
+import ToDo from './components/ToDo.js'
+import {Header} from 'semantic-ui-react'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        To Do app!
-      </header>
+      <Header as='h1' className='header' textAlign='center'>To Do app!</Header>
+      <ToDo/>
     </div>
   );
 }
