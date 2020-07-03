@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, Form, Grid} from 'semantic-ui-react'
 
-function ToDo() {
+export default function ToDo(props) {
+
+  const [input, setInput] = useState('');
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log(evt)
+    props.handleFormSubmit('hi')
   }
 
   return (
@@ -13,12 +15,10 @@ function ToDo() {
       <Form size='large' onSubmit={handleSubmit}>
         <Form.Field>
           <label>Task</label>
-            <input placeholder='To Do' />
+            <input placeholder='To Do'/>
         </Form.Field>
           <Button type='submit'>Submit</Button>
       </Form>
     </Grid>
   )
 }
-
-export default ToDo;
