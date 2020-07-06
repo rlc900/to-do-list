@@ -5,17 +5,15 @@ import {Header} from 'semantic-ui-react'
 
 function App() {
 
-  const [data, setData] = useState('');
+  const [state, setData] = useState({todoArr: []});
 
-  const handleFormSubmit = (input) => {
-    console.log(input)
-  }
+
 
   return (
     <div className="App">
       <Header as='h1' className='header' textAlign='center'>To Do app!</Header>
-      <ToDo handleFormSubmit={handleFormSubmit}/>
-      <ToDoContainer tasks={data}/>
+      <ToDo addToDo={(input) => {setData(input)}}/>
+      <ToDoContainer tasks={state}/>
     </div>
   );
 }

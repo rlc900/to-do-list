@@ -3,11 +3,14 @@ import {Button, Form, Grid} from 'semantic-ui-react'
 
 export default function ToDo(props) {
 
-  const [input, setInput] = useState('');
+  const [data, setData] = useState({newToDo: {todo: '', key: ''}})
+
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    props.handleFormSubmit('hi')
+    // props.addToDo()
+    // setInput('')
+    console.log('props from app', props, 'todo state', data)
   }
 
   return (
