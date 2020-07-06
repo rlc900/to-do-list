@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 // import ToDo from './components/ToDo.js'
 // import ToDoContainer from './components/ToDoContainer.js'
 import {Header, Grid, Form, Button, List} from 'semantic-ui-react'
@@ -53,6 +53,19 @@ function App() {
     const newToDos = [...toDoArr, {text}];
     setToDoArr(newToDos)
   }
+  //
+  useEffect(() => {
+    // only want to run after the first render
+    const data = localStorage.getItem('all-todos')
+    // CHECK if you have data, and then pasre the JSON.stringify
+    if (data) {
+      setToDoArr(JSON.parse(data));
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log(localStorage.setItem('all-todos', JSON.stringify(toDoArr)))
+  })
 
   return (
     <div className="App">
