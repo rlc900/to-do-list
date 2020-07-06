@@ -1,17 +1,19 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Button, Form, Grid, List} from 'semantic-ui-react'
 
 export default function ToDo(props) {
 
-  const [todo, setToDo] = useState({todo: '', date: ''})
+  // const [todo, setToDo] = useState({todo: '', date: ''})
 
 
   const handleSubmit = (evt) => {
-    evt.preventDefault();
-    props.addToDo(todo)
-    setToDo({todo: '', date: ''})
+    // evt.preventDefault();
+    // props.addToDo(todo)
+    // setToDo({todo: '', date: ''})
     // console.log('props from app', props, 'todo state', data)
   }
+
+
 
   return (
     <>
@@ -26,7 +28,7 @@ export default function ToDo(props) {
       </Grid>
         <List as='ol'>
             <List.Item as='li' value='*'>
-              <List.Content content={todo}>
+              <List.Content>
               </List.Content>
             </List.Item>
         </List>
