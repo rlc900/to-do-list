@@ -51,18 +51,6 @@ function ToDo(props) {
   );
 }
 
-// function ToDoContainer(props) {
-//   // console.log(props)
-//   let toDoArray = props.state.map(toDoObj => (
-//
-//   ))
-//   return (
-//     <div>
-//     </div>
-//   )
-// }
-
-
 function App() {
 
   const [toDoArr, setToDoArr] = useState([{text: '', id: 0}]);
