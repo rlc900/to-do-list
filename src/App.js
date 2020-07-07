@@ -1,6 +1,4 @@
 import React, {useState, useEffect} from 'react';
-// import ToDo from './components/ToDo.js'
-// import ToDoContainer from './components/ToDoContainer.js'
 import {Header, Grid, Form, Button, List} from 'semantic-ui-react'
 
 // TODO FORM FUNCTIONAL COMPONENT
@@ -37,7 +35,7 @@ function ToDoForm ({ addToDo }) {
 const ToDo = ({todo}) => {
   return (
         <List as='ol'>
-            <List.Item as='li' value='*'>
+            <List.Item as='li' value='*' >
               <List.Content content={todo.text}>
               </List.Content>
             </List.Item>
@@ -47,13 +45,16 @@ const ToDo = ({todo}) => {
 
 function App() {
 
-  const [toDoArr, setToDoArr] = useState([{text: 'yo'}]);
+  const [toDoArr, setToDoArr] = useState([{text: 'yo', id: 0}]);
 
+  // ADDING A TODO
   const addToDo = (text) => {
-    const newToDos = [...toDoArr, {text}];
-    setToDoArr(newToDos)
+    const newId = toDoArr.length + 1
+    const newToDo = {...toDoArr, text: text, id: newId};
+    const modifiedToDoArr = [newToDo, ...toDoArr]
+    setToDoArr(modifiedToDoArr)
   }
-  //
+
   useEffect(() => {
     // only want to run after the first render
     const data = localStorage.getItem('all-todos')
