@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Header, Grid, Form, Button, List} from 'semantic-ui-react'
+import {Header, Grid, Form, Button, List, Checkbox} from 'semantic-ui-react'
 
 // TODO FORM FUNCTIONAL COMPONENT
 function ToDoForm ({ addToDo }) {
@@ -47,6 +47,7 @@ function ToDo(props) {
               </List.Content>
             </List.Item>
             <Button onClick={handleDelete}>Delete</Button>
+            <Checkbox/>
         </List>
   );
 }
@@ -89,10 +90,8 @@ function App() {
       {toDoArr.map((todo, index) => (
         <ToDo todo={todo} index={index} deleteToDo={deleteToDo} state={toDoArr}/>
       ))}
-
     </div>
   );
 }
 
 export default App;
-  // <ToDoContainer deleteTodo={deleteToDo} state={toDoArr}/>
