@@ -39,7 +39,6 @@ function ToDo(props) {
     props.deleteToDo(props.todo.id)
   }
 
-
   return (
         <List as='ol'>
             <List.Item as='li' value='*' >
@@ -47,14 +46,23 @@ function ToDo(props) {
               </List.Content>
             </List.Item>
             <Button onClick={handleDelete}>Delete</Button>
-            <Checkbox/>
+            <Checkbox
+            checked={props.todo.isCompleted ? true : false}
+            onClick={() => { props.completeToDo(props.index)}}/>
         </List>
   );
 }
 
 function App() {
 
-  const [toDoArr, setToDoArr] = useState([{text: '', id: 0}]);
+  const [toDoArr, setToDoArr] = useState([{text: '', id: 0, isCompleted: false}]);
+
+  // COMPLETE TODO
+  const completeToDo = (idx) => {
+    let newToDos = [...toDoArr]
+    newToDos[idx].isCompleted = true
+    setToDoArr(newToDos)
+  }
 
   // ADDING A TODO
   const addToDo = (text) => {
@@ -88,7 +96,13 @@ function App() {
       <Header as='h1' className='header' textAlign='center'>To Do app!</Header>
       <ToDoForm addToDo={addToDo}/>
       {toDoArr.map((todo, index) => (
-        <ToDo todo={todo} index={index} deleteToDo={deleteToDo} state={toDoArr}/>
+        <ToDo
+        todo={todo}
+        index={index}
+        deleteToDo={deleteToDo}
+        state={toDoArr}
+        completeToDo={completeToDo}
+        />
       ))}
     </div>
   );
