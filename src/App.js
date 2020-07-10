@@ -40,6 +40,7 @@ function ToDo(props) {
   }
 
   return (
+    <Grid className='list-grid' centered={true}>
         <List as='ol'>
             <List.Item as='li' value='*' >
               <List.Content content={props.todo.text}>
@@ -50,6 +51,7 @@ function ToDo(props) {
             checked={props.todo.isCompleted ? true : false}
             onClick={() => { props.completeToDo(props.index)}}/>
         </List>
+    </Grid>
   );
 }
 
