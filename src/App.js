@@ -95,7 +95,13 @@ function App() {
 
   return (
     <div className="App">
-      <Header as='h1' className='header' textAlign='center'>To Do app!</Header>
+      <Header as='h1'
+      className='header'
+      textAlign='center'
+
+      >
+      To Do app!
+      </Header>
       <ToDoForm addToDo={addToDo}/>
       {toDoArr.map((todo, index) => (
         <ToDo
