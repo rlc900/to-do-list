@@ -16,9 +16,9 @@ function ToDoForm ({ addToDo }) {
 
   return(
     <Grid centered={true}>
-      <Form size='large' onSubmit={handleSubmit}>
+      <Form className={styles.form} size='large' onSubmit={handleSubmit}>
         <Form.Field>
-          <label>Task</label>
+          <Header className={styles.label}>Task</Header>
             <input
             placeholder='To Do'
             type='text'
