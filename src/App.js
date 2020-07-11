@@ -44,7 +44,10 @@ function ToDo(props) {
     <Grid className={styles.grid} centered={true}>
         <List as='ol'>
             <List.Item as='li' value='*' >
-              <List.Content content={props.todo.text}>
+              <List.Content
+              className={styles.list}
+              content={props.todo.text}
+              >
               </List.Content>
             </List.Item>
             <Button onClick={handleDelete}>Delete</Button>
