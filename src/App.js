@@ -43,7 +43,8 @@ function ToDo(props) {
   return (
     <Grid className={styles.grid} centered={true}>
         <List as='ol'>
-            <List.Item as='li' value='*' >
+            <List.Item value='*' >
+              <List.Icon name='star outline'/>
               <List.Content
               className={styles.list}
               content={props.todo.text}
