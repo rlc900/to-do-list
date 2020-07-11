@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Header, Grid, Form, Button, List, Checkbox} from 'semantic-ui-react'
+import styles from './page.module.scss'
 
 // TODO FORM FUNCTIONAL COMPONENT
 function ToDoForm ({ addToDo }) {
@@ -40,7 +41,7 @@ function ToDo(props) {
   }
 
   return (
-    <Grid className='list-grid' centered={true}>
+    <Grid className={styles.grid} centered={true}>
         <List as='ol'>
             <List.Item as='li' value='*' >
               <List.Content content={props.todo.text}>
@@ -96,7 +97,7 @@ function App() {
   return (
     <div className="App">
       <Header as='h1'
-      className='header'
+      className={styles.header}
       textAlign='center'
 
       >

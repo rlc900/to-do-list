@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.ui.center.aligned.header, .ui.centered.header {
+    text-align: center;
+    margin-top: 30px !important;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -12,6 +17,7 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
 
 .App-link {
   color: #61dafb;
@@ -24,4 +30,15 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.ui.header {
+    border: none;
+    margin: calc(2rem - .14285714em) 0 1rem;
+    padding: 0 0;
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+    font-weight: 700;
+    line-height: 1.28571429em;
+    text-transform: none;
+    color: white;
 }
