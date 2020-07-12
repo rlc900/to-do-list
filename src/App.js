@@ -107,6 +107,7 @@ function App() {
       To Do app!
       </Header>
       <ToDoForm addToDo={addToDo}/>
+      <div className={styles.app}>
       {toDoArr.map((todo, index) => (
         <ToDo
         todo={todo}
@@ -116,6 +117,7 @@ function App() {
         completeToDo={completeToDo}
         />
       ))}
+      </div>
     </div>
   );
 }
