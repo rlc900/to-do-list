@@ -57,15 +57,24 @@ function ToDo(props) {
   );
 }
 
+function CompleteToDo() {
+  return (
+    <div className={styles.completedDiv}>
+    </div>
+  )
+}
+
 function App() {
 
   const [toDoArr, setToDoArr] = useState([{text: '', id: 0, isCompleted: false}]);
+
 
   // COMPLETE TODO
   const completeToDo = (idx) => {
     let newToDos = [...toDoArr]
     newToDos[idx].isCompleted = true
     setToDoArr(newToDos)
+
   }
 
   // ADDING A TODO
@@ -103,20 +112,21 @@ function App() {
       >
       To Do app!
       </Header>
-      <ToDoForm addToDo={addToDo}/>
-      <div className={styles.app}>
-      {toDoArr.map((todo, index) => (
-        <ToDo
-        todo={todo}
-        index={index}
-        deleteToDo={deleteToDo}
-        state={toDoArr}
-        completeToDo={completeToDo}
-        />
-      ))}
+        <ToDoForm addToDo={addToDo}/>
+          <div className={styles.app}>
+            {toDoArr.map((todo, index) => (
+              <ToDo
+              todo={todo}
+              index={index}
+              deleteToDo={deleteToDo}
+              state={toDoArr}
+              completeToDo={completeToDo}
+              />
+            ))}
+          </div>
+          <CompleteToDo/>
       </div>
-    </div>
-  );
+    );
 }
 
 export default App;

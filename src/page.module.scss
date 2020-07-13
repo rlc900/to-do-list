@@ -27,14 +27,21 @@
   }
 
   .app {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: lightgrey;
     width: 700px;
     height: 600px;
     border: 15px solid black;
     // margin: auto;
     margin-top: 20px;
+  }
+
+  .completedDiv {
+    background-color: lightgrey;
+    width: 700px;
+    height: 600px;
+    border: 15px solid green;
+    margin-left: auto;
+    position: relative;
+    top: -600px;
   }
 }
