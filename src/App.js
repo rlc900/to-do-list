@@ -43,14 +43,11 @@ function ToDo(props) {
   return (
     <Grid className={styles.grid} centered={true}>
         <List as='ol'>
-            <List.Item value='*' >
-              <List.Icon name='star outline'/>
               <List.Content
               className={styles.list}
               content={props.todo.text}
               >
               </List.Content>
-            </List.Item>
             <Button onClick={handleDelete}>Delete</Button>
             <Checkbox
             checked={props.todo.isCompleted ? true : false}
