@@ -57,9 +57,18 @@ function ToDo(props) {
   );
 }
 
-function CompleteToDo() {
+function CompleteToDo(props) {
+  console.log(props.state)
   return (
     <div className={styles.completedDiv}>
+      <Header as='h1'
+      className={styles.header}
+      textAlign='center'
+      >
+      Completed
+      </Header>
+      {props.state.isCompleted ? props.state.map((todo, index) => (
+         <ToDo/> )) : null}
     </div>
   )
 }
@@ -70,11 +79,14 @@ function App() {
 
 
   // COMPLETE TODO
-  const completeToDo = (idx) => {
+  const completeToDo = (toDoObj) => {
     let newToDos = [...toDoArr]
-    newToDos[idx].isCompleted = true
+    newToDos[toDoObj].isCompleted = true
     setToDoArr(newToDos)
 
+    return (
+      <CompleteToDo/>
+    )
   }
 
   // ADDING A TODO
@@ -112,20 +124,26 @@ function App() {
       >
       To Do app!
       </Header>
-        <ToDoForm addToDo={addToDo}/>
-          <div className={styles.app}>
-            {toDoArr.map((todo, index) => (
-              <ToDo
-              todo={todo}
-              index={index}
-              deleteToDo={deleteToDo}
-              state={toDoArr}
-              completeToDo={completeToDo}
-              />
-            ))}
-          </div>
-          <CompleteToDo/>
+      <ToDoForm addToDo={addToDo}/>
+        <div className={styles.app}>
+          <Header as='h1'
+          className={styles.header}
+          textAlign='center'
+          >
+          Active
+          </Header>
+         {toDoArr.map((todo, index) => (
+            <ToDo
+            todo={todo}
+            index={index}
+            deleteToDo={deleteToDo}
+            state={toDoArr}
+            completeToDo={completeToDo}
+            />
+          ))}
       </div>
+          <CompleteToDo state={toDoArr}/>
+        </div>
     );
 }
 
