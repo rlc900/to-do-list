@@ -7,7 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #97EBC1;
   height: 100vh;
-  cursor: url('/public/sparkle.svg');
+  cursor: url('hummingbird.png'), auto;
 }
 
 code {
