@@ -6,6 +6,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #97EBC1;
+  height: 100vh;
+  cursor: url('/public/sparkle.svg');
 }
 
 code {

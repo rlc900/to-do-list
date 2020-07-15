@@ -68,7 +68,16 @@ function CompleteToDo(props) {
       Completed
       </Header>
       {props.state.isCompleted ? props.state.map((todo, index) => (
-         <ToDo/> )) : null}
+        <Grid className={styles.grid} centered={true}>
+            <List as='ol'>
+                  <List.Content
+                  className={styles.list}
+                  content={props.todo.text}
+                  >
+                  </List.Content>
+            </List>
+        </Grid>
+         )) : null}
     </div>
   )
 }
@@ -143,6 +152,7 @@ function App() {
           ))}
       </div>
           <CompleteToDo state={toDoArr}/>
+          
         </div>
     );
 }
