@@ -35,11 +35,11 @@ function ToDoForm ({ addToDo }) {
 
 function ToDo(props) {
 
-  const handleDelete = (evt) => {
-    // console.log(props)
-    props.deleteToDo(props.todo.id)
+  const handleDelete = (id) => {
+    props.deleteToDo(id)
   }
 
+console.log(props.todo)
   return (
     <Grid className={styles.grid} centered={true}>
         <List as='ol'>
@@ -48,17 +48,27 @@ function ToDo(props) {
               content={props.todo.text}
               >
               </List.Content>
-            <Button onClick={handleDelete}>Delete</Button>
+            <Button onClick={() => {
+              handleDelete(props.todo.id)
+            }}>Delete</Button>
             <Checkbox
             checked={props.todo.isCompleted ? true : false}
-            onClick={() => { props.completeToDo(props.index)}}/>
+            onClick={() => { props.completeToDo(props.todo)}}/>
         </List>
     </Grid>
   );
 }
 
 function CompleteToDo(props) {
-  console.log(props.state)
+  console.log(props.completedArr)
+
+  function clearCompletedArr() {
+    fetch('http://localhost:3000/completedToDos', {
+      method: 'DELETE'
+    })
+    props.setCompletedArr([])
+  }
+
   return (
     <div className={styles.completedDiv}>
       <Header as='h1'
@@ -67,63 +77,76 @@ function CompleteToDo(props) {
       >
       Completed
       </Header>
-      {props.state.isCompleted ? props.state.map((todo, index) => (
+      <Button onClick={clearCompletedArr}>Clear</Button>
+       {props.completedArr.map((todo) => (
         <Grid className={styles.grid} centered={true}>
             <List as='ol'>
                   <List.Content
                   className={styles.list}
-                  content={props.todo.text}
+                  content={todo.text}
                   >
                   </List.Content>
             </List>
         </Grid>
-         )) : null}
+         ))}
     </div>
   )
 }
 
 function App() {
 
-  const [toDoArr, setToDoArr] = useState([{text: '', id: 0, isCompleted: false}]);
-
+  const [toDoArr, setToDoArr] = useState([]);
+  const [completedArr, setCompletedArr] = useState([])
 
   // COMPLETE TODO
   const completeToDo = (toDoObj) => {
-    let newToDos = [...toDoArr]
-    newToDos[toDoObj].isCompleted = true
-    setToDoArr(newToDos)
+    console.log(toDoObj)
+    fetch('http://localhost:3000/todos/' + toDoObj.id, {
+      method: 'DELETE'
+    })
+    fetch('http://localhost:3000/completedToDos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(toDoObj)
 
-    return (
-      <CompleteToDo/>
-    )
+  })
+  .then(r => r.json())
+  .then( data => setCompletedArr([...completedArr, data]))
+    let newToDos = [...toDoArr]
+    setToDoArr(newToDos)
+    deleteToDo(toDoObj.id)
+    // take what todo was clikced and put in completed array
   }
 
   // ADDING A TODO
   const addToDo = (text) => {
-    let newId = toDoArr.length + 1
-    let newToDo = {...toDoArr, text: text, id: newId};
+    let newToDo = {text: text};
     let modifiedToDoArr = [newToDo, ...toDoArr]
     setToDoArr(modifiedToDoArr)
   }
 
   // DELETING A TODO
   const deleteToDo = (id) => {
+    console.log(id)
     let filteredArr = toDoArr.filter(toDo => toDo.id !== id)
     setToDoArr(filteredArr)
   }
 
   useEffect(() => {
-    // only want to run after the first render
-    const data = localStorage.getItem('all-todos')
-    // CHECK if you have data, and then pasre the JSON.stringify
-    if (data) {
-      setToDoArr(JSON.parse(data));
-    }
-  }, [])
 
-  useEffect(() => {
-    console.log(localStorage.setItem('all-todos', JSON.stringify(toDoArr)))
-  })
+    fetch('http://localhost:3000/todos')
+      .then(r => r.json())
+      .then(data => setToDoArr(data))
+
+    fetch('http://localhost:3000/completedToDos')
+      .then(r => r.json())
+      .then(data => {
+        console.log(data)
+        setCompletedArr(data)})
+
+  }, [])
 
   return (
     <div className="App">
@@ -151,8 +174,8 @@ function App() {
             />
           ))}
       </div>
-          <CompleteToDo state={toDoArr}/>
-          
+          <CompleteToDo completedArr={completedArr} setCompletedArr={setCompletedArr}/>
+
         </div>
     );
 }
