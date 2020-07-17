@@ -62,11 +62,15 @@ console.log(props.todo)
 function CompleteToDo(props) {
   console.log(props.completedArr)
 
-  function clearCompletedArr() {
-    fetch('http://localhost:3000/completedToDos', {
-      method: 'DELETE'
-    })
-    props.setCompletedArr([])
+  // function clearCompletedArr() {
+  //   fetch('http://localhost:3000/completedToDos', {
+  //     method: 'DELETE'
+  //   })
+  //   props.setCompletedArr([])
+  // }
+
+  const handleDelete = (id) => {
+    props.deleteCompletedToDo(id)
   }
 
   return (
@@ -77,7 +81,6 @@ function CompleteToDo(props) {
       >
       Completed
       </Header>
-      <Button onClick={clearCompletedArr}>Clear</Button>
        {props.completedArr.map((todo) => (
         <Grid className={styles.grid} centered={true}>
             <List as='ol'>
@@ -86,6 +89,9 @@ function CompleteToDo(props) {
                   content={todo.text}
                   >
                   </List.Content>
+                  <Button onClick={() => {
+                    handleDelete(todo.id)
+                  }}>Delete</Button>
             </List>
         </Grid>
          ))}
@@ -100,6 +106,8 @@ function App() {
 
   // COMPLETE TODO
   const completeToDo = (toDoObj) => {
+    // The purpose of this function is to mak a regular todo a completed do by deleting
+    // the prev from the toDoArr and making a post request to add it to the completed todos
     console.log(toDoObj)
     fetch('http://localhost:3000/todos/' + toDoObj.id, {
       method: 'DELETE'
@@ -129,9 +137,14 @@ function App() {
 
   // DELETING A TODO
   const deleteToDo = (id) => {
-    console.log(id)
+    // console.log(id)
     let filteredArr = toDoArr.filter(toDo => toDo.id !== id)
     setToDoArr(filteredArr)
+  }
+
+  const deleteCompletedToDo = (id) => {
+    let filteredCompleted = completedArr.filter(completedToDo => completedToDo.id !== id)
+    setCompletedArr(filteredCompleted)
   }
 
   useEffect(() => {
@@ -174,7 +187,7 @@ function App() {
             />
           ))}
       </div>
-          <CompleteToDo completedArr={completedArr} setCompletedArr={setCompletedArr}/>
+          <CompleteToDo completedArr={completedArr} setCompletedArr={setCompletedArr} deleteCompletedToDo={deleteCompletedToDo}/>
 
         </div>
     );
