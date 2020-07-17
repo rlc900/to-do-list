@@ -142,7 +142,9 @@ function App() {
     setToDoArr(filteredArr)
   }
 
+  // DELETING A COMPLETED TO DO
   const deleteCompletedToDo = (id) => {
+
     let filteredCompleted = completedArr.filter(completedToDo => completedToDo.id !== id)
     setCompletedArr(filteredCompleted)
   }
@@ -187,8 +189,11 @@ function App() {
             />
           ))}
       </div>
-          <CompleteToDo completedArr={completedArr} setCompletedArr={setCompletedArr} deleteCompletedToDo={deleteCompletedToDo}/>
-
+          <CompleteToDo
+          completedArr={completedArr}
+          setCompletedArr={setCompletedArr}
+          deleteCompletedToDo={deleteCompletedToDo}
+          />
         </div>
     );
 }
