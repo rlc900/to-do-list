@@ -8,6 +8,7 @@ function ToDoForm ({ addToDo }) {
 
   const handleSubmit = (evt) => {
     // console.log(addToDo)
+    console.log(value)
     evt.preventDefault();
     if (!value) return;
     addToDo(value);
@@ -62,13 +63,6 @@ console.log(props.todo)
 function CompleteToDo(props) {
   console.log(props.completedArr)
 
-  // function clearCompletedArr() {
-  //   fetch('http://localhost:3000/completedToDos', {
-  //     method: 'DELETE'
-  //   })
-  //   props.setCompletedArr([])
-  // }
-
   const handleDelete = (id) => {
     props.deleteCompletedToDo(id)
   }
@@ -119,32 +113,46 @@ function App() {
       },
       body: JSON.stringify(toDoObj)
 
-  })
-  .then(r => r.json())
-  .then( data => setCompletedArr([...completedArr, data]))
-    let newToDos = [...toDoArr]
-    setToDoArr(newToDos)
-    deleteToDo(toDoObj.id)
-    // take what todo was clikced and put in completed array
+    })
+    .then(r => r.json())
+    .then( data => setCompletedArr([...completedArr, data]))
+      let newToDos = [...toDoArr]
+      setToDoArr(newToDos)
+      deleteToDo(toDoObj.id)
+      // take what todo was clikced and put in completed array
   }
 
   // ADDING A TODO
   const addToDo = (text) => {
+    // console.log(text)
     let newToDo = {text: text};
     let modifiedToDoArr = [newToDo, ...toDoArr]
-    setToDoArr(modifiedToDoArr)
+    fetch('http://localhost:3000/todos/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(newToDo)
+    })
+    .then(r => r.json())
+    .then((r) => {
+      setToDoArr(modifiedToDoArr)
+    })
   }
 
   // DELETING A TODO
   const deleteToDo = (id) => {
     // console.log(id)
+    fetch('http://localhost:3000/todos/' + id, {
+      method: 'DELETE'
+    })
     let filteredArr = toDoArr.filter(toDo => toDo.id !== id)
     setToDoArr(filteredArr)
   }
 
   // DELETING A COMPLETED TO DO
   const deleteCompletedToDo = (id) => {
-
     let filteredCompleted = completedArr.filter(completedToDo => completedToDo.id !== id)
     setCompletedArr(filteredCompleted)
   }
