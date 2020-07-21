@@ -153,6 +153,9 @@ function App() {
 
   // DELETING A COMPLETED TO DO
   const deleteCompletedToDo = (id) => {
+    fetch('http://localhost:3000/completedToDos/' + id, {
+      method: 'DELETE'
+    })
     let filteredCompleted = completedArr.filter(completedToDo => completedToDo.id !== id)
     setCompletedArr(filteredCompleted)
   }

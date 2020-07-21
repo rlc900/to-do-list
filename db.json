@@ -1,9 +1,4 @@
 {
   "todos": [],
-  "completedToDos": [
-    {
-      "text": "grocery shopping",
-      "id": 1
-    }
-  ]
+  "completedToDos": []
 }
