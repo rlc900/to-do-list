@@ -8,7 +8,7 @@ function ToDoForm ({ addToDo }) {
 
   const handleSubmit = (evt) => {
     // console.log(addToDo)
-    console.log(value)
+    // console.log(value)
     evt.preventDefault();
     if (!value) return;
     addToDo(value);
@@ -40,7 +40,7 @@ function ToDo(props) {
     props.deleteToDo(id)
   }
 
-console.log(props.todo)
+// console.log('TODO COMP PROPS', props.todo)
   return (
     <Grid className={styles.grid} centered={true}>
         <List as='ol'>
@@ -126,7 +126,8 @@ function App() {
   const addToDo = (text) => {
     // console.log(text)
     let newToDo = {text: text};
-    let modifiedToDoArr = [newToDo, ...toDoArr]
+    console.log(newToDo)
+
     fetch('http://localhost:3000/todos/', {
       method: 'POST',
       headers: {
@@ -137,6 +138,8 @@ function App() {
     })
     .then(r => r.json())
     .then((r) => {
+      let modifiedToDoArr = [newToDo, ...toDoArr]
+      console.log('MODIFIED TODO ARRAY', modifiedToDoArr)
       setToDoArr(modifiedToDoArr)
     })
   }
@@ -148,6 +151,7 @@ function App() {
       method: 'DELETE'
     })
     let filteredArr = toDoArr.filter(toDo => toDo.id !== id)
+    console.log(filteredArr)
     setToDoArr(filteredArr)
   }
 
@@ -169,7 +173,7 @@ function App() {
     fetch('http://localhost:3000/completedToDos')
       .then(r => r.json())
       .then(data => {
-        console.log(data)
+        // console.log(data)
         setCompletedArr(data)})
 
   }, [])
