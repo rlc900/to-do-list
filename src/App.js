@@ -138,7 +138,7 @@ function App() {
     })
     .then(r => r.json())
     .then((r) => {
-      let modifiedToDoArr = [newToDo, ...toDoArr]
+      let modifiedToDoArr = [r, ...toDoArr]
       console.log('MODIFIED TODO ARRAY', modifiedToDoArr)
       setToDoArr(modifiedToDoArr)
     })
@@ -168,7 +168,7 @@ function App() {
 
     fetch('http://localhost:3000/todos')
       .then(r => r.json())
-      .then(data => setToDoArr(data))
+      .then(data => setToDoArr(data.reverse()))
 
     fetch('http://localhost:3000/completedToDos')
       .then(r => r.json())
